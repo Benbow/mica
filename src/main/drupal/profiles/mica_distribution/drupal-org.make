@@ -238,10 +238,10 @@ projects[xmlsitemap] = 2.0-rc2
 ; Themes
 ; ---------
 
-projects[bootstrap][type] = theme
-projects[bootstrap][download][type] = git
-projects[bootstrap][download][revision] = dc32478
-projects[bootstrap][download][branch] = 7.x-2.x
+projects[bootstrap] = 2.0-beta3
+;projects[bootstrap][download][type] = git
+;projects[bootstrap][download][revision] = dc32478
+;projects[bootstrap][download][branch] = 7.x-2.x
 
 projects[corolla] = 3.0-rc1
 
