@@ -1771,7 +1771,7 @@ function mica_studies_field_default_fields() {
           'questionnaires' => 'Questionnaires',
           'physical_measures' => 'Physical measures',
           'biological_samples' => 'Biological samples',
-          'administratives_databases' => 'Administritative Databases',
+          'administratives_databases' => 'Administrative Databases',
           'others' => 'Others',
         ),
         'allowed_values_function' => '',
