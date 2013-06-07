@@ -417,7 +417,7 @@ function _mica_studies_save_add_dce_submit($form, &$form_state) {
 function _mica_studies_data_collection_event_form_alter(&$form, &$form_state, $form_id) {
   $form['#validate'][] = '_mica_data_collection_event_form_validate';
 
-  // Prepopulate study node reference in population edit form and hide it
+  //Prepopulate study node reference in population edit form and hide it
   if (isset($_REQUEST['population'])) {
     $lang = $form['field_dce_population']['#language'];
     $form['field_dce_population'][$lang]['#after_build'][] = '_mica_studies_prepopulate_dce_after_build';
@@ -1032,9 +1032,19 @@ function mica_studies_node_reference_field_dce_population_potential_references($
   }
 
   $references = array();
+
+  $query = new EntityFieldQuery;
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'population');
+
   if (!empty($study_nid)) {
-    $study_wrapper = entity_metadata_wrapper('node', $study_nid);
-    foreach ($study_wrapper->field_study_populations->getIterator() as $pop_wrapper) {
+    $query->fieldCondition('field_pop_study', 'nid', $study_nid);
+  }
+  $entities = $query->execute();
+
+  if (!empty($entities)) {
+    foreach ($entities['node'] as $pop) {
+      $pop_wrapper = entity_metadata_wrapper('node', $pop->nid);
       $references[$pop_wrapper->nid->value()] = array(
         'title' => $pop_wrapper->title->value(),
         'rendered' => check_plain($pop_wrapper->title->value()),
